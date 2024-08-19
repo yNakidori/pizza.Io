@@ -1,4 +1,4 @@
-🍕 Sistema de Gerenciamento de Pizzarias
+🍕 Sistema de Gerenciamento para Pizzarias
 
 
 
