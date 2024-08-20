@@ -1,0 +1,22 @@
+/* Exemplo de estilos básicos */
+.root {
+  -fx-font-family: "Arial";
+  -fx-background-color: #f4f4f4;
+}
+
+.button {
+  -fx-font-size: 14px;
+  -fx-text-fill: #fff;
+  -fx-background-color: #007bff;
+}
+
+.button:hover {
+  -fx-background-color: #0056b3;
+}
+
+.text-field,
+.password-field {
+  -fx-border-color: #ced4da;
+  -fx-border-radius: 4px;
+  -fx-padding: 5px;
+}
