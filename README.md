@@ -1,5 +1,8 @@
 🍕 Sistema de Gerenciamento para Pizzarias
 
+![image](https://github.com/user-attachments/assets/b3d26e6b-1e81-4323-8734-d5f754008c28)
+
+
 Sobre o Projeto
 
 Este é um sistema de gerenciamento para pizzarias, desenvolvido em Java, que tem como objetivo auxiliar pizzarias a gerenciar pedidos, imprimir recibos e organizar o fluxo de trabalho de forma eficiente. Este projeto é open-source e gratuito, permitindo que qualquer um possa contribuir e adaptá-lo às suas necessidades.
