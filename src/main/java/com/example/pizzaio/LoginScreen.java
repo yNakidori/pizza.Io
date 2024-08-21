@@ -1,40 +1,52 @@
 package com.example.pizzaio;
 
-import javafx.geometry.Insets;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginScreen {
 
-    public void showLoginScreen(Stage stage) {
-        stage.setTitle("Login - Sistema de Pizzaria");
+    private Stage stage;
+    private static final String CREDENTIALS_FILE = "users.txt";
 
-        VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(20));
+    public LoginScreen(Stage stage) {
+        this.stage = stage;
+    }
 
-        Label userLabel = new Label("Usuário:");
-        TextField userField = new TextField();
-        userField.setPromptText("Digite seu usuário");
+    public void showLoginScreen() {
+        try {
+            // Carregar o layout do FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginScreenLayout.fxml"));
+            Parent root = loader.load();
 
-        Label passwordLabel = new Label("Senha:");
-        PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText("Digite sua senha");
+            // Configurar a cena
+            Scene scene = new Scene(root, 640, 400);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            stage.setTitle("Login - pizza.Io");
+            stage.setScene(scene);
+            stage.show();
 
-        Button loginButton = new Button("Login");
-        loginButton.setMinWidth(200);
-        loginButton.setOnAction(e -> handleLogin(stage, userField.getText(), passwordField.getText()));
+            // Referências aos componentes do FXML
+            TextField userField = (TextField) scene.lookup("#usuarioTextField");
+            PasswordField passwordField = (PasswordField) scene.lookup("#senhaTextField");
+            Button loginButton = (Button) scene.lookup("#entrarButton");
 
-        vbox.getChildren().addAll(userLabel, userField, passwordLabel, passwordField, loginButton);
+            // Configurar a ação do botão de login
+            loginButton.setOnAction(e -> handleLogin(stage, userField.getText(), passwordField.getText()));
 
-        Scene scene = new Scene(vbox, 400, 250);
-        scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleLogin(Stage stage, String username, String password) {
@@ -47,6 +59,26 @@ public class LoginScreen {
     }
 
     private boolean isValidCredentials(String username, String password) {
-        return "admin".equals(username) && "1234".equals(password);
+        try (BufferedReader reader = new BufferedReader(new FileReader(CREDENTIALS_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2 && parts[0].equals(username) && parts[1].equals(password)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void createNewUser(String username, String password) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CREDENTIALS_FILE, true))) {
+            writer.write(username + ":" + password);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
