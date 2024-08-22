@@ -1,11 +1,12 @@
 package com.example.pizzaio;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,18 @@ import javafx.stage.Stage;
 
 public class LoginScreen {
 
+    @FXML
+    private Button entrarButton;
+
+    @FXML
+    private Button criarUsuarioButton;
+
+    @FXML
+    private TextField userField;
+
+    @FXML
+    private PasswordField passwordField;
+
     private Stage stage;
     private static final String CREDENTIALS_FILE = "users.txt";
 
@@ -25,36 +38,36 @@ public class LoginScreen {
 
     public void showLoginScreen() {
         try {
-            // Carregar o layout do FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginScreenLayout.fxml"));
             Parent root = loader.load();
 
             // Configurar a cena
             Scene scene = new Scene(root, 640, 400);
-            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
             stage.setTitle("Login - pizza.Io");
             stage.setScene(scene);
             stage.show();
 
-            // Referências aos componentes do FXML
-            TextField userField = (TextField) scene.lookup("#usuarioTextField");
-            PasswordField passwordField = (PasswordField) scene.lookup("#senhaTextField");
-            Button loginButton = (Button) scene.lookup("#entrarButton");
+            // Referências aos componentes FXML
+            TextField userField = (TextField) scene.lookup("#userField");
+            PasswordField passwordField = (PasswordField) scene.lookup("#passwordField");
+            Button entrarButton = (Button) scene.lookup("#entrarButton");
+            Button criarUsuarioButton = (Button) scene.lookup("#criarUsuarioButton");
 
-            // Configurar a ação do botão de login
-            loginButton.setOnAction(e -> handleLogin(stage, userField.getText(), passwordField.getText()));
+            // Configurar ações dos botões
+            entrarButton.setOnAction(e -> handleLogin(userField.getText(), passwordField.getText()));
+            criarUsuarioButton.setOnAction(e -> showCreateUserScreen());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void handleLogin(Stage stage, String username, String password) {
+    private void handleLogin(String username, String password) {
         if (isValidCredentials(username, password)) {
-            MainScreen mainScreen = new MainScreen();
-            mainScreen.showMainScreen(stage);
+            JOptionPane.showMessageDialog(null, "Login realizado com sucesso.");
+            // Redirecionar para a próxima tela da aplicação
         } else {
-            System.out.println("Usuário ou senha incorretos.");
+            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.");
         }
     }
 
@@ -62,8 +75,8 @@ public class LoginScreen {
         try (BufferedReader reader = new BufferedReader(new FileReader(CREDENTIALS_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":");
-                if (parts.length == 2 && parts[0].equals(username) && parts[1].equals(password)) {
+                String[] credentials = line.split(":");
+                if (credentials[0].equals(username) && credentials[1].equals(password)) {
                     return true;
                 }
             }
@@ -73,12 +86,8 @@ public class LoginScreen {
         return false;
     }
 
-    private void createNewUser(String username, String password) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CREDENTIALS_FILE, true))) {
-            writer.write(username + ":" + password);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void showCreateUserScreen() {
+        CreateUserScreen createUserScreen = new CreateUserScreen(stage);
+        createUserScreen.showCreteUserScreen();
     }
 }
