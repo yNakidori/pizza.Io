@@ -1,10 +1,10 @@
 package com.example.pizzaio;
 
-import javax.swing.JOptionPane;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +21,10 @@ public class CreateUserScreen {
     private Button createButton;
 
     @FXML
-    private TextField userField;
+    private TextField usuarioTextField;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField senhaTextField;
 
     private Stage stage;
     private static final String CREDENTIALS_FILE = "users.txt";
@@ -33,25 +33,20 @@ public class CreateUserScreen {
         this.stage = stage;
     }
 
-    public void showCreteUserScreen() {
+    public void showCreateUserScreen() {
         try {
-            //Carregar o layout FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateUserScreenLayout.fxml"));
+            loader.setController(this); // Define this class as the controller
             Parent root = loader.load();
 
-            //Configurar a cena
+            // Configurar a cena
             Scene scene = new Scene(root, 640, 400);
             stage.setTitle("Criar Usuário - pizza.Io");
             stage.setScene(scene);
             stage.show();
 
-            //Refetencias aos componentes doFXML
-            TextField userField = (TextField) scene.lookup("#usuarioTextField");
-            PasswordField passwordField = (PasswordField) scene.lookup("#senhatextField");
-            Button createButton = (Button) scene.lookup("#criarButton");
-
             //Configurar a ação do botão de criar
-            createButton.setOnAction(e -> handleCreate(userField.getText(), passwordField.getText()));
+            createButton.setOnAction(e -> handleCreate(usuarioTextField.getText(), senhaTextField.getText()));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -39,6 +39,7 @@ public class LoginScreen {
     public void showLoginScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginScreenLayout.fxml"));
+            loader.setController(this); // Define this class as the controller
             Parent root = loader.load();
 
             // Configurar a cena
@@ -46,12 +47,6 @@ public class LoginScreen {
             stage.setTitle("Login - pizza.Io");
             stage.setScene(scene);
             stage.show();
-
-            // Referências aos componentes FXML
-            TextField userField = (TextField) scene.lookup("#userField");
-            PasswordField passwordField = (PasswordField) scene.lookup("#passwordField");
-            Button entrarButton = (Button) scene.lookup("#entrarButton");
-            Button criarUsuarioButton = (Button) scene.lookup("#criarUsuarioButton");
 
             // Configurar ações dos botões
             entrarButton.setOnAction(e -> handleLogin(userField.getText(), passwordField.getText()));
@@ -88,6 +83,6 @@ public class LoginScreen {
 
     private void showCreateUserScreen() {
         CreateUserScreen createUserScreen = new CreateUserScreen(stage);
-        createUserScreen.showCreteUserScreen();
+        createUserScreen.showCreateUserScreen();
     }
 }

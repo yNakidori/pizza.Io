@@ -94,15 +94,15 @@
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="378.0" layoutX="365.0" stroke="BLACK" strokeType="INSIDE" width="275.0" />
-            <TextField fx:id="usuarioTextField" layoutX="430.0" layoutY="165.0" promptText="Usuario:" />
+           <TextField fx:id="userField" layoutX="430.0" layoutY="165.0" promptText="Usuario:" />
             <ImageView fitHeight="114.0" fitWidth="149.0" layoutX="430.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                     <Image url="@../content/gif.gif" />
                </image>
             </ImageView>
-            <Button fx:id="criarUsuarioButton" layoutX="454.0" layoutY="291.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Criar usuario" />
-            <Button fx:id="entrarButton" layoutX="454.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Entrar" textFill="#1da84b" />
-            <PasswordField fx:id="senhaTextField" layoutX="430.0" layoutY="211.0" promptText="Senha:" />
+           <Button fx:id="entrarButton" layoutX="454.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Entrar" textFill="#1da84b" />
+           <Button fx:id="criarUsuarioButton" layoutX="454.0" layoutY="291.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Criar usuario" />
+           <PasswordField fx:id="passwordField" layoutX="430.0" layoutY="211.0" promptText="Senha:" />
       </children>
     </AnchorPane>
   </children>
