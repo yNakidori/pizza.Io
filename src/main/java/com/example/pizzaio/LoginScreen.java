@@ -61,6 +61,7 @@ public class LoginScreen {
         if (isValidCredentials(username, password)) {
             JOptionPane.showMessageDialog(null, "Login realizado com sucesso.");
             // Redirecionar para a próxima tela da aplicação
+            showMainScreen();
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.");
         }
@@ -84,5 +85,10 @@ public class LoginScreen {
     private void showCreateUserScreen() {
         CreateUserScreen createUserScreen = new CreateUserScreen(stage);
         createUserScreen.showCreateUserScreen();
+    }
+
+    private void showMainScreen() {
+        MainScreen mainScreen = new MainScreen(stage);
+        mainScreen.showMainScreen();
     }
 }
