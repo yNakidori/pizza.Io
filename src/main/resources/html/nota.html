@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .nota-container {
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #000;
+      }
+      .header {
+        text-align: center;
+        border-bottom: 1px solid #000;
+        margin-bottom: 10px;
+      }
+      .header h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      .pedido-item {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 5px 0;
+      }
+      .pedido-item:last-child {
+        border-bottom: none;
+      }
+      .footer {
+        margin-top: 10px;
+        text-align: right;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nota-container">
+      <div class="header">
+        <h1>Pizza.Io</h1>
+        <p>Endereço da Pizzaria</p>
+      </div>
+      <div class="pedido">
+        <!-- Itens do pedido aqui -->
+      </div>
+      <div class="footer">
+        <!-- Total e outras informações -->
+      </div>
+    </div>
+  </body>
+</html>

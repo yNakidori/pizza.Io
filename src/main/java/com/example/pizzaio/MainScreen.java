@@ -107,6 +107,7 @@ public class MainScreen {
     }
 
     private void imprimirPedido(String pedido) {
+
         PrinterJob printerJob = PrinterJob.createPrinterJob();
 
         if (printerJob != null) {
